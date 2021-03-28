@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mappy | Map</title>
+	<script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+	<link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+	<script src="./map.js" defer></script>
+	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.1/mapbox-gl-directions.js"></script>
+	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.1/mapbox-gl-directions.css"/>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/b22ced689c.js" crossorigin="anonymous"></script>
+	<link rel="icon" href="./images/favicon.png" type="image/png" sizes="16x16">
+	<meta property="og:title" content="Mappy - Make YOUR community happy." />
+    <meta property="og:description"
+        content="Make YOUR community happy.
+        Discover Local Businesses, with Mappy!"/>
+    <meta property="og:url" content="https://mappymap.netlify.app/"/>
+    <meta property="og:image" content="https://i.ibb.co/cbcB9Nh/Mlogo.png"/>
+	<style>
+		body {
+			margin: 0;
+		}
+		#map{
+			height: 100vh;
+			width: 100vw;
+		}
+		.marker {
+			background-image: url(./images/marker.png);
+			background-size: contain;
+			background-repeat: no-repeat;
+			width: 20px;
+			height: 38px;
+			cursor: pointer;
+		}
+		.mapboxgl-popup-content {
+			visibility: hidden;
+		}
+
+		.mapboxgl-ctrl .mapboxgl-ctrl-logo {
+			display: none !important;
+		}
+	</style>
+	<style>
+		.sidebar  {
+  width: 0;
+  min-width: none;
+  position: fixed;
+  z-index: 999;
+  height: 100%;
+  top: 0;
+  right: 0;
+  background-color: white;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 8px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+  font-family: "Montserrat", sans-serif;
+  color: black;
+}
+
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  cursor: pointer;
+}
+
+
+.sidebar .closebtn:hover {
+  color: #f1f1f1;
+}
+
+.content {
+	margin-right: 20px;
+	margin-left: 20px;
+	word-break: break-word;
+	white-space: normal;
+}
+
+.fa-check {
+	color: green;
+}
+
+.fa-times {
+	color: red;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+#title {
+	font-weight: 700;
+	font-size: 24px;
+}
+
+#category {
+	color: #757575;
+}
+
+#description {
+	font-size: 10px;
+}
+
+#takeout, #pickup {
+	font-size: 12px;
+}
+
+#address, #website, #phone {
+	font-size: 14px;
+}
+
+#website:hover, #phone:hover {
+	text-decoration: underline;
+}
+
+#suntime, #montime, #tuetime, #wedtime, #thutime, #fritime, #sattime {
+	font-size: 12px;
+	padding: 0px 8px 0px 8px;
+}
+
+hr {
+	border-top: 1px solid lightgrey;
+}
+
+table {
+	padding: 0px 8px 0px 8px;
+	font-family: "Montserrat", sans-serif;
+	font-size: 14px;
+}
+
+td:nth-child(1) {
+	font-weight: 700;
+}
+
+td {
+	padding-right: 30px;
+}
+
+.filter {
+	z-index: 99999;
+	position: fixed;
+	bottom: 20px;
+	left: 20px;
+}
+
+#filter {
+	width: 100%;
+	padding: 5px 35px 5px 5px;
+	font-size: 12px;
+	border: 1px solid #CCC;
+	height: 34px;
+	-webkit-appearance: none;
+	background: url("./images/arrow.png") 96% / 15% no-repeat #EEE;
+	font-family: 'Montserrat', sans-serif;
+	box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;
+	cursor: pointer;
+}
+
+#filter:focus {
+	border: none;
+	box-shadow: none;
+	outline: none;
+}
+</style>
+</head>
+<body>
+	<div id='map'></div>
+	<div id="sidebar" class="sidebar">
+		<div class="content">
+			<a class="closebtn" onclick="closeNav()">×</a>
+			<a id="title"></a>
+			<a id="category"></a>
+			<a id="description"></a>
+			<a id="takeout"></a>
+			<a id="pickup"></a>
+			<hr>
+			<a id="address"></a>
+			<a target="_blank" id="website"></a>
+			<a target="_blank" id="phone"></a>
+			<table>
+				<tr>
+					<td><b>Sunday</b></td>
+					<td id="suntime"></td>
+				</tr>
+				<tr>
+					<td>Monday</td>
+					<td id="montime"></td>
+				</tr>
+				<tr>
+					<td>Tuesday</td>
+					<td id="tuetime"></td>
+				</tr>
+				<tr>
+					<td>Wednesday</td>
+					<td id="wedtime"></td>
+				</tr>
+				<tr>
+					<td>Thursday</td>
+					<td id="thutime"></td>
+				</tr>
+				<tr>
+					<td>Friday</td>
+					<td id="fritime"></td>
+				</tr>
+				<tr>
+					<td>Saturday</td>
+					<td id="sattime"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class="filter">
+		<select id="filter" onchange=filter()>
+			<option disabled selected>Category</option>
+			<option value="Agriculture">Agriculture</option>
+			<option value="Breakfast">Breakfast</option>
+			<option value="Car Wash">Car Wash</option>
+			<option value="Coffee">Coffee</option>
+			<option value="Convenience Store">Convenience Store</option>
+			<option value="Fast Food">Fast Food</option>
+			<option value="Groceries">Groceries</option>
+			<option value="Lodging">Lodging</option>
+			<option value="Restaurant">Restaurant</option>
+			<option value="Utility">Utility</option>
+			<option value="All">All</option>
+		</select>
+	</div>
+	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+</body>
+</html>

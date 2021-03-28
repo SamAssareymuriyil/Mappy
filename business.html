@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mappy | Business</title>
+  <link rel="stylesheet" href="style2.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="./business.js" defer></script>
+  <link rel="icon" href="./images/favicon.png" type="image/png" sizes="16x16">
+  <meta property="og:title" content="Mappy - Make YOUR community happy." />
+  <meta property="og:description"
+      content="Make YOUR community happy.
+      Discover Local Businesses, with Mappy!"/>
+  <meta property="og:url" content="https://mappymap.netlify.app/"/>
+  <meta property="og:image" content="https://i.ibb.co/cbcB9Nh/Mlogo.png"/>
+</head>
+<body>
+  <div id="logo">
+    <img src="./images/Mappy3.png" href="index.html">
+  </div>
+  <nav><ul>
+    <div id="logout">
+      <h4 onclick="logout()">Log Out</h4>
+    </div>
+  </ul></nav>
+  <div>
+    <h3 class="top-right">Business ID: <a id="bizID">######</a></h3>
+  </div>
+  <br><br><br>
+  <div class="content">
+    <h1>Business Information</h1>
+    <div class="container">
+      <label>Business Name</label>
+      <div id="bName" class="underline" contenteditable></div>
+      <span class="border"></span>
+    </div>
+    <br><br>
+    <div class="container">
+      <label>Description</label>
+      <div id="descrip" class="underline" contenteditable></div>
+      <span class="border"></span>
+    </div>
+    <br><br>
+    <div class="container">
+      <label>Address</label>
+      <div id="addy" class="underline" contenteditable></div>
+      <span class="border"></span>
+    </div>
+    <br><br>
+    <div class="container">
+      <label>Postal Code</label>
+      <div id="pCode" class="underline" contenteditable></div>
+      <span class="border"></span>
+    </div>
+    <br><br>
+    <div class="container">
+      <label>Phone Number</label>
+      <input id="pNum" class="underline" type="tel" required>
+      <span class="border"></span>
+    </div>
+    <br><br>
+    <div class="container">
+      <label>Latitude</label>
+      <div id="lat" class="underline" contenteditable></div>
+      <span class="border"></span>
+    </div>
+    <br><br>
+    <div class="container">
+      <label>Longitude</label>
+      <div id="long" class="underline" contenteditable></div>
+      <span class="border"></span>
+    </div>
+    <br><br>
+    <div class="container">
+      <label>Website</label>
+      <div id="wSite" class="underline" contenteditable></div>
+      <span class="border"></span>
+    </div>
+    <br><br>
+    <div class="container">
+      <label>Business Category</label><br><br>
+      <select id="cat" class="select-dropdown">
+        <option disabled selected value>Category</option>
+        <option value="Agriculture">Agriculture</option>
+        <option value="Breakfast">Breakfast</option>
+        <option value="Car Wash">Car Wash</option>
+        <option value="Coffee">Coffee</option>
+        <option value="Convenience Store">Convenience Store</option>
+        <option value="Fast Food">Fast Food</option>
+        <option value="Groceries">Groceries</option>
+        <option value="Lodging">Lodging</option>
+        <option value="Restaurant">Restaurant</option>
+        <option value="Utility">Utility</option>
+      </select>
+    </div>
+    <br>
+    <div class="container">
+      <h4>Take Out</h4>
+      <label class="toggle">
+        <input id="tOut" type="checkbox">
+        <span class="slider round"></span>
+      </label>
+    </div>
+    <div class="container">
+      <h4>Curbside Pickup</h4>
+      <label class="toggle">
+        <input id="pUp" type="checkbox">
+        <span class="slider round"></span>
+      </label>
+    </div>
+    <br>
+    <div class="hours">
+      <h1>Hours of Operation</h1>
+      <div class="container">
+        <label>Sunday</label>
+        <div id="SUNtime" class="underline" contenteditable></div>
+        <span class="border"></span>
+      </div>
+      <br>
+      <div class="container">
+        <label>Monday</label>
+        <div id="MONtime" class="underline" contenteditable></div>
+        <span class="border"></span>
+      </div>
+      <br>
+      <div class="container">
+        <label>Tuesday</label>
+        <div id="TUEtime" class="underline" contenteditable></div>
+        <span class="border"></span>
+      </div>
+      <br>
+      <div class="container">
+        <label>Wednesday</label>
+        <div id="WEDtime" class="underline" contenteditable></div>
+        <span class="border"></span>
+      </div>
+      <br>
+      <div class="container">
+        <label>Thursday</label>
+        <div id="THUtime" class="underline" contenteditable></div>
+        <span class="border"></span>
+      </div>
+      <br>
+      <div class="container">
+        <label>Friday</label>
+        <div id="FRItime" class="underline" contenteditable></div>
+        <span class="border"></span>
+      </div>
+      <br>
+      <div class="container">
+        <label>Saturday</label>
+        <div id="SATtime" class="underline" contenteditable></div>
+        <span class="border"></span>
+      </div>
+    </div>
+    <br>
+    <div class="wrapper">
+      <button onclick="push()">Submit</button>
+    </div>
+    <br>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+</body>
+</html>
