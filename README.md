@@ -20,11 +20,11 @@ Mappy was built by: [Haris Kamal](https://github.com/HarisK03), [Sam Assareymuri
 ### For Business Users
 Local businesses can sign up for Mappy through Firebase authentication using their Google account. Clicking the **Sign-Up** button will open a pop-up window that will instruct the user to sign-up through their Google account.
 
-*Picture of landing page*
+![alt text](https://i.imgur.com/Y2P698y.png)
 
 Once signed up, the Google account used to register with Mappy will be sent to the Firebase database. A specific ID will then be assigned to the business. Businesses will be able to create a profile that includes key information regarding their business which will be attached to their ID. 
 
-*Picture of data entry page*
+![alt text](https://i.imgur.com/LV8mbzK.png)
 
 Once the form is completed, the data will be stored in the Firebase Realtime Database. The map view will then refresh to include the new marker. 
 
@@ -36,11 +36,11 @@ Mappy's map view functions similarly to other web mapping services. Mappy allows
 * Opening and Closing Hours
 * An option for takeout or curbside pickup
 
-*Map view of Mappy + Popout Box*
+![alt text](https://i.imgur.com/eR8gRK3.png)
 
 Additionally, Mappy offers trip planning features that allow users to quickly find directions to any of the small businesses within the application.
 
-*Trip planning*
+![alt text](https://i.imgur.com/ppwkZrs.png)
 
 ## Key Features
 Feature | Description
@@ -76,3 +76,5 @@ Mappy has the potential to be updated with robust features including:
 * Real-time Directions
 * Reviews and Ratings
 
+## Citations
+* Images & icons used from [Undraw](https://undraw.co/) and [Freepik](https://www.freepik.com/)
