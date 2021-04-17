@@ -1,11 +1,11 @@
 const firebaseConfig = {
-	apiKey: "AIzaSyDB3eWUfNaMDZyp7Sx3_mcg9VYswBVPgns",
-	authDomain: "mappy-7fdbf.firebaseapp.com",
-	databaseURL: "https://mappy-7fdbf-default-rtdb.firebaseio.com",
-	projectId: "mappy-7fdbf",
-	storageBucket: "mappy-7fdbf.appspot.com",
-	messagingSenderId: "844352059623",
-	appId: "1:844352059623:web:b595b27c89bee10d3f4a42"
+	apiKey: "",
+	authDomain: "",
+	databaseURL: "",
+	projectId: "",
+	storageBucket: "",
+	messagingSenderId: "",
+	appId: ""
 };
 firebase.initializeApp(firebaseConfig);
 
